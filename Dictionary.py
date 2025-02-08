@@ -32,15 +32,15 @@ else:
   print(False)
 # ⇒ False
 
-# 辞書のキーと値のペアの数を調べるには
+# len() 辞書のキーと値のペアの数を調べるには
 print(len(family_ages))   # ⇒ 4
 
-# 特定のキーを削除するには
+# del 特定のキーを削除するには
 del family_ages['father']
 print(family_ages)   # ⇒ {'son' : 14, 'mother' : 44, 'brother' : 18}
 
 # メソッド編
-# キーの一覧を取得する
+# .keys() キーの一覧を取得する
 print(family_ages.keys())   # ⇒ dict_keys(['son','mother','brother'])
 # for文と組み合わせると
 for key in family_ages.keys():
@@ -51,7 +51,7 @@ for key in family_ages.keys():
 # List型と組み合わせると
 print(list(family_ages.keys()))   # ⇒ ['son','mother','brother']
 
-# 値の一覧を取得する
+# .values() 値の一覧を取得する
 print(family_ages.values())   # ⇒ dict_values([14,44,18])
 # for文と組み合わせると
 for value in family_ages.values():
@@ -62,7 +62,7 @@ for value in family_ages.values():
 #List型と組み合わせると
 print(list(family_ages.values()))   # ⇒ [14,44,18]
 
-# キーと値の組み合わせの一覧を取得する
+# .items() キーと値の組み合わせの一覧を取得する
 print(family_ages.items())   # ⇒ dict_items([('son',14),('mother',44),('brother',18)])
 # for文と組み合わせると
 for key,value in family_ages.items():
@@ -73,29 +73,44 @@ for key,value in family_ages.items():
 # List型と組み合わせると
 print(list(family_ages.items()))   # ⇒ [('son',14),('mother',44),('brother',18)]
 
-# 特定のキーの値を取得する
+# .get(key,なかった場合の値) 特定のキーの値を取得する
 print(family_ages.get('brother','UNKNOWN'))   # ⇒ 18
 print(family_ages.get('sister','UNKNOWN'))   # ⇒ UNKNOWN
 
-# 特定のキーの値を取得し、それを削除する
+# .pop(key,なかった場合の値) 特定のキーの値を取得し、それを削除する
 print(family_ages.pop('mother','UNKNOWN'))   # ⇒ 44
 print(family_ages.pop('father','UNKNOWN'))   # ⇒ UNKNOWN
 print(family_ages)   # ⇒ {'son' : 14, 'brother' : 18}
 
-# 別の辞書を結合させる
+# .update(dictionary) 別の辞書を結合させる
 parents_ages =  {'mother' : 44, 'father' : 45}
 family_ages.update(parents_ages)
 print(family_ages)  # ⇒ {'son' : 14, 'brother' : 18, 'mother' : 44, 'father' : 45}
 
-# 辞書を複製する
+# .copy(dictionary) 辞書を複製する
 new_family_ages = family_ages.copy()
 print(new_family_ages)  # ⇒ {'son' : 14, 'brother' : 18, 'mother' : 44, 'father' : 45}
 
-# 辞書の中身を削除する
+# .clear() 辞書の中身を削除する
 new_family_ages.clear()
 print(new_family_ages)  # ⇒ {}
 
-# 特定のキーの値を取得し、それが存在しない場合、そのキーと値を追加する
+# .setdefault(key.なかった場合の値) 特定のキーの値を取得し、それが存在しない場合、そのキーと値を追加する
 print(family_ages.setdefault('son',''))   # ⇒ 14
 print(family_ages.setdefault('sister','16'))   # ⇒ 16
 print(new_family_ages)  # ⇒ {'son' : 14, 'brother' : 18, 'mother' : 44, 'father' : 45, 'sister' : 16}
+
+# dict.fromkeys(keys,values) 特定のリストから辞書を作成する
+twins_keys = ['elder','younger']
+twins_value = 15
+twins_ages = dict.fromkeys(twins_keys, twins_value)
+print(twins_ages)   # ⇒ {'elder' : 15, 'younger' : 15}
+brothers_keys = ['elder','younger']
+brothers_values = [19,15]
+brothers_ages = dict.fromkeys(brothers_keys, brothers_values)
+print(brothers_ages)   # ⇒ {'elder' : 19, 'younger' : 15}
+
+# .popitem() ランダムなキーと値の組み合わせを取得し、削除する
+key,value = family_ages.popitem()
+print(key,item)   # ⇒ 'son',14
+print(family_ages)  # ⇒ {'brother' : 18, 'mother' : 44, 'father' : 45}
